@@ -18,4 +18,4 @@ app.use("/api/user", require("./controllers/usercontroller"))
 app.use(require("./middleware/validate-session"))
 app.use("/api/expenses", require("./controllers/authcontroller"))
 
-app.listen(3000, () => console.log("App listening on port 3000")) // use express to start a UNIX socket and listen for connections on the given path
+app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`)) // use express to start a UNIX socket and listen for connections on the given path

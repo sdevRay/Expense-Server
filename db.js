@@ -1,6 +1,6 @@
 // Sequelize Connection
 const Sequelize = require("sequelize")
-const sequelize = new Sequelize("PERN", "postgres", "mypassword", {
+const sequelize = new Sequelize(process.env.DBNAME, process.env.PGUSER, process.env.PGPASS, {
     host: "localhost",
     dialect: "postgres"
 })
