@@ -14,11 +14,8 @@ router.get("/", (req, res) => {
                 owner: userId
             }
         })
-        // .then(data => res.json(data)) // WHAT THE FUCK??
-        .then(function onSuccess(data){
-            res.json(data)
-        })
-        .catch(err => res.send(500, err.message))
+        .then(data => res.json(data))
+        .catch(err => res.status(500).send(err.message))
 })
 
 // * POST ITEMS FOR INDIVIDUAL USER
@@ -29,12 +26,16 @@ router.post("/", (req, res) => {
     AuthModel
         .create({
             item: req.body.expenses.item,
+            cost: req.body.expenses.cost,
+            paymentMethod: req.body.expenses.paymentMethod,
+            dueDate: req.body.expenses.dueDate,
+            paid: req.body.expenses.paid,
             owner: userId
         })
         .then(data => {
             res.json({ data: data })
         })
-        .catch(err => res.send(500, err.message))
+        .catch(err => res.status(500).send(err.message))
 })
 
 // Delete specific item using that items PK id
@@ -48,7 +49,7 @@ router.delete("/", (req, res) => {
             }
         })
         .then(data => res.send("Item removed"))
-        .catch(err => res.send(500, err.message))
+        .catch(err => res.status(500).send(err.message))
 })
 
 // Update specific item using that items PK id
@@ -57,7 +58,11 @@ router.put("/", (req, res) => {
 
     AuthModel
         .update({
-            item: req.body.expenses.item
+            item: req.body.expenses.item,
+            cost: req.body.expenses.cost,
+            paymentMethod: req.body.expenses.paymentMethod,
+            dueDate: req.body.expenses.dueDate,
+            paid: req.body.expenses.paid,
         },
             {
                 where: {
@@ -66,7 +71,7 @@ router.put("/", (req, res) => {
             }
         )
         .then(data => res.json({ expenses: data }))
-        .catch(err => res.send(500, err.message))
+        .catch(err => res.status(500).send(err.message))
 })
 
 module.exports = router

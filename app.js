@@ -7,6 +7,7 @@ var app = express()
 // SEQUELIZE
 var sequelize = require("./db")
 sequelize.sync() // PASS IN { force: true } FOR RESETTING TABLES 
+// sequelize.sync({force: true})  
 var bodyParser = require("body-parser")
 app.use(bodyParser.json())
 
