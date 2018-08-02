@@ -1,6 +1,5 @@
 var router = require("express").Router()
 var sequelize = require("../db")
-// var UserModel = sequelize.import("../models/usermodel")
 var AuthModel = sequelize.import("../models/authmodel")
 
 // * GET ALL ITEMS FOR AN INDIVIDUAL USER

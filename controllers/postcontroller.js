@@ -18,4 +18,35 @@ router.post("/", (req, res) => {
         .catch(err => res.status(500).send(err.message))
 })
 
+router.get("/", (req, res) => {
+    var userId = req.user.id // req.user.id comes from validate-sessions middleware
+
+    AuthModel
+        .findAll({
+            where: {
+                owner: userId
+            }
+        })
+        .then(data => res.json(data))
+        .catch(err => res.status(500).send(err.message))
+})
+
+// Update specific item using that items PK id
+
+router.put("/", (req, res) => {
+
+    PostModel
+        .update({
+            total: req.body.post,
+        },
+            {
+                where: {
+                    id: req.body.id
+                }
+            }
+        )
+        .then(data => res.json({ expenses: data }))
+        .catch(err => res.status(500).send(err.message))
+})
+
 module.exports = router
